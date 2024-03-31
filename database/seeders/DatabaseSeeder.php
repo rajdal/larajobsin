@@ -33,10 +33,9 @@ class DatabaseSeeder extends Seeder
             'Svelte',
         ];
 
-        foreach($tags as $tag)
-        {
+        foreach ($tags as $tag) {
             Tag::create([
-                'name' => $tag
+                'name' => $tag,
             ]);
         }
     }

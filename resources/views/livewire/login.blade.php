@@ -1,15 +1,16 @@
 
-@extends('layouts.app')
-@section('content')
+{{-- @extends('layouts.app')
+@section('content') --}}
 <div>
     <section class="relative min-w-ful">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+            <a href="{{route('home')}}" wire:navigate class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                 LarajobsIndia
             </a>
             <div class="w-full dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
 
-                <form wire:submit="login">
+                <form wire:submit="userLogin">
+                    @csrf
                     {{ $this->form }}
 
                     <button type="submit"
@@ -19,7 +20,9 @@
                 </form>
             </div>
 
-            <x-filament-actions::modals />
+            {{-- <x-filament-actions::modals /> --}}
         </div>
-@endsection
+    </section>
+</div>
+{{-- @endsection --}}
 

@@ -2,20 +2,19 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use Filament\Forms\Form;
-use Filament\Forms\Components\Group;
-use Illuminate\Support\Facades\Auth;
-use Filament\Support\Enums\Alignment;
 use Filament\Forms\Components\Actions;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\TextInput;
-use Filament\Notifications\Notification;
 use Filament\Forms\Components\Actions\Action;
-use Filament\Support\Enums\VerticalAlignment;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Form;
+use Filament\Notifications\Notification;
+use Filament\Support\Enums\VerticalAlignment;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class Login extends Component implements HasForms
 {
@@ -40,23 +39,24 @@ class Login extends Component implements HasForms
                         Actions::make([
                             Action::make('Register')->url(route('register')),
                         ])->verticalAlignment(VerticalAlignment::End),
-                    ])->columns(2)
-                ])
+                    ])->columns(2),
+                ]),
             ])->statePath('data');
     }
 
-
-    public function login()
+    public function userLogin()
     {
-        if(Auth::attempt(['email' => $this->data['email'], 'password' => $this->data['password']]))
-        {
-            Notification::make()->success()->title('Login Success')->body('Welcome ' . Auth::user()->name)->send();
+        if (Auth::attempt(['email' => $this->data['email'], 'password' => $this->data['password']])) {
+            Notification::make()->success()->title('Login Success')->body('Welcome '.Auth::user()->name)->send();
+
             return redirect()->route('home');
         } else {
             Notification::make()->danger()->title('Login Failed')->body('Invalid email or password.')->send();
+
             return to_route('login');
         }
     }
+
     public function render()
     {
         return view('livewire.login');
