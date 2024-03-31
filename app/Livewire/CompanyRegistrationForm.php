@@ -2,27 +2,25 @@
 
 namespace App\Livewire;
 
-use Filament\Forms;
 use App\Models\Company;
-use Livewire\Component;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
-use Filament\Forms\Components\Group;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Tables\Contracts\HasTable;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Tables\Concerns\InteractsWithTable;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Livewire\Component;
 
 class CompanyRegistrationForm extends Component implements HasForms, HasTable
 {
-    use InteractsWithTable;
     use InteractsWithForms;
+    use InteractsWithTable;
 
     public ?array $data = [];
 
@@ -56,13 +54,13 @@ class CompanyRegistrationForm extends Component implements HasForms, HasTable
                             ->imagePreviewHeight(245),
                     ])->columns(2),
 
-                ])
+                ]),
             ])
             ->statePath('data')
             ->model(Company::class);
     }
 
-    public function table(Table $table) : Table
+    public function table(Table $table): Table
     {
         return $table
             ->query(Company::query()->where('user_id', auth()->id()))

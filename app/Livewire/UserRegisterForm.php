@@ -2,24 +2,21 @@
 
 namespace App\Livewire;
 
-use Filament\Forms;
 use App\Models\User;
-use Livewire\Component;
-use Filament\Forms\Form;
-use Forms\Components\Button;
-use Illuminate\Support\HtmlString;
-use Illuminate\Contracts\View\View;
-use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Actions;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\TextInput;
-use Filament\Notifications\Notification;
-use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Actions\Action;
-use Filament\Support\Enums\VerticalAlignment;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Form;
+use Filament\Notifications\Notification;
+use Filament\Support\Enums\VerticalAlignment;
+use Illuminate\Contracts\View\View;
+use Livewire\Component;
 
 class UserRegisterForm extends Component implements HasForms
 {
@@ -41,13 +38,18 @@ class UserRegisterForm extends Component implements HasForms
                     TextInput::make('email')->required()->email()->unique(User::class, 'email'),
                     TextInput::make('password')->required()->password(),
                     TextInput::make('password_confirmation')->required()->password(),
+                    Select::make('role')->label('Register As')
+                        ->options([
+                            'candidate' => 'Candidate',
+                            'employer'=> 'Employer',
+                        ]),
                     Group::make()->schema([
                         Checkbox::make('terms')->label('I agree')->required(),
                         Actions::make([
                             Action::make('Login')->url(route('login')),
                         ])->verticalAlignment(VerticalAlignment::End),
-                    ])->columns(2)
-                ])
+                    ])->columns(2),
+                ]),
             ])
             ->statePath('data')
             ->model(User::class);
@@ -58,9 +60,8 @@ class UserRegisterForm extends Component implements HasForms
         $data = $this->form->getState();
 
         $record = User::create($data);
-
+        $record->assignRole($data['role']);
         Notification::make()->success()->title('Account created.')->send();
-
         return to_route('login');
 
         // $this->form->model($record)->saveRelationships();

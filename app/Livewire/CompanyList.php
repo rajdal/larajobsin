@@ -3,26 +3,21 @@
 namespace App\Livewire;
 
 use App\Models\Company;
-use Livewire\Component;
-use Filament\Tables\Table;
-use Filament\Tables\Actions\Action;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Contracts\TranslatableContentDriver;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Table;
+use Livewire\Component;
 
-class CompanyList extends Component implements HasTable, HasForms
+class CompanyList extends Component implements HasForms, HasTable
 {
-    use InteractsWithTable;
     use InteractsWithForms;
-
-    public function makeFilamentTranslatableContentDriver() : ?TranslatableContentDriver
-    {
-        return null;
-    }
+    use InteractsWithTable;
 
     public function table(Table $table): Table
     {
@@ -31,7 +26,7 @@ class CompanyList extends Component implements HasTable, HasForms
             ->heading('Companies')
             ->columns([
                 TextColumn::make('name'),
-                SpatieMediaLibraryImageColumn::make('logo')->collection('company-logo')
+                SpatieMediaLibraryImageColumn::make('logo')->collection('company-logo'),
             ])
             ->filters([
                 // ...
@@ -43,13 +38,14 @@ class CompanyList extends Component implements HasTable, HasForms
                 // ...
             ])->emptyStateActions([
                 Action::make('create')
-                ->label('Create Company')
-                ->url(route('create.company'))
-                ->icon('heroicon-m-plus')
-                ->button(),
+                    ->label('Create Company')
+                    ->url(route('create.company'))
+                    ->icon('heroicon-m-plus')
+                    ->button(),
             ])
             ->paginated(false);
     }
+
     public function render()
     {
         return view('livewire.company-list');

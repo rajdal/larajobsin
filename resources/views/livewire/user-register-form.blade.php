@@ -19,3 +19,6 @@
 
             <x-filament-actions::modals />
         </div>
+    </section>
+
+</div>

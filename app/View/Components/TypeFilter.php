@@ -2,11 +2,12 @@
 
 namespace App\View\Components;
 
+use App\Models\Tag;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class sub-heading extends Component
+class TypeFilter extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +22,8 @@ class sub-heading extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.sub-heading');
+        $tags = Tag::all();
+
+        return view('components.type-filter')->with('tags', $tags);
     }
 }

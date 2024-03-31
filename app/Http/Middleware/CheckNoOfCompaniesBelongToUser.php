@@ -20,6 +20,7 @@ class CheckNoOfCompaniesBelongToUser
         if ($companies > 0) {
             return back()->with('error', 'You can not create more than one company.');
         }
+
         return $next($request);
     }
 }
