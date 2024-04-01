@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('jobs', function (Blueprint $table) {
+        Schema::table('vacancies', function (Blueprint $table) {
             $table->boolean('manage_by_self')->default(false)->after('salary_to');
             $table->string('apply_url')->nullable()->change();
         });
@@ -22,8 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('jobs', function (Blueprint $table) {
-            //
+        Schema::table('vacancies', function (Blueprint $table) {
+            $table->dropColumn('manage_by_self');
         });
     }
 };
