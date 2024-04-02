@@ -11,4 +11,5 @@
 
     <x-filament-actions::modals />
     </div>
+    @livewire('notifications')
 </div>

@@ -51,7 +51,7 @@ class CompanyRegistrationForm extends Component implements HasForms, HasTable
                         SpatieMediaLibraryFileUpload::make('logo')
                             ->collection('company-logo')
                             ->imageEditor()
-                            ->imagePreviewHeight(245),
+                            ->imagePreviewHeight('full'),
                     ])->columns(2),
 
                 ]),

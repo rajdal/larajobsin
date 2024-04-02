@@ -10,6 +10,7 @@ use App\Livewire\HomePage;
 use App\Livewire\JobList;
 use App\Livewire\JobPost;
 use App\Livewire\Login;
+use App\Livewire\ShowJob;
 use App\Livewire\UserRegisterForm;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,7 @@ Route::get('/', HomePage::class)->name('home');
 
 Route::get('login-test', Login::class)->name('login');
 Route::get('/register', UserRegisterForm::class)->name('register');
+Route::get('job-details/{job}/{company}', ShowJob::class)->name('job.details');
 
 Route::get('jobs', JobList::class);
 
@@ -43,6 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('companies', CompanyList::class)->name('companies');
 
     Route::get('post-job', JobPost::class)->name('post.job');
+    Route::get('job-list', JobList::class)->name('list.job');
     Route::get('create-resume', CreateResume::class)->name('create.resume');
     Route::get('edit-resume/{resume}', EditResume::class)->name('edit.resume');
     Route::get('apply/{job}', [ApplicationController::class, 'apply'])->name('apply');

@@ -30,6 +30,7 @@
                 @foreach ($tags as $tag)
                     <option value="{{$tag->name}}">{{$tag->name}}</option>
                 @endforeach
+                <option value="all">All</option>
             </select>
     </div>
 </div>

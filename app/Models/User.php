@@ -20,10 +20,10 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements FilamentUser, HasMedia
 {
     use HasApiTokens;
-    use InteractsWithMedia;
     use HasFactory;
     use HasProfilePhoto;
     use HasRoles;
+    use InteractsWithMedia;
     use Notifiable;
     use TwoFactorAuthenticatable;
 
@@ -72,15 +72,15 @@ class User extends Authenticatable implements FilamentUser, HasMedia
     public function canAccessPanel(Panel $panel): bool
     {
         // dd(auth()->user()->hasAnyRole(['admin','employer']));
-        return auth()->user()->hasAnyRole(['admin','employer']);
+        return auth()->user()->hasAnyRole(['admin', 'employer']);
     }
 
-    public function resume() : BelongsTo
+    public function resume(): BelongsTo
     {
         return $this->belongsTo(Resume::class);
     }
 
-    public function company() : BelongsTo
+    public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
     }

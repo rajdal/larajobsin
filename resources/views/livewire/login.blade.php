@@ -23,6 +23,7 @@
             {{-- <x-filament-actions::modals /> --}}
         </div>
     </section>
+    @livewire('notifications')
 </div>
 {{-- @endsection --}}
 
