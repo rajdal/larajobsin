@@ -41,7 +41,7 @@ class UserRegisterForm extends Component implements HasForms
                     Select::make('role')->label('Register As')
                         ->options([
                             'candidate' => 'Candidate',
-                            'employer'=> 'Employer',
+                            'employer' => 'Employer',
                         ]),
                     Group::make()->schema([
                         Checkbox::make('terms')->label('I agree')->required(),
@@ -62,6 +62,7 @@ class UserRegisterForm extends Component implements HasForms
         $record = User::create($data);
         $record->assignRole($data['role']);
         Notification::make()->success()->title('Account created.')->send();
+
         return to_route('login');
 
         // $this->form->model($record)->saveRelationships();

@@ -14,7 +14,9 @@ class CandidateApplied extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     public $data;
+
     public $file;
+
     /**
      * Create a new message instance.
      */
@@ -42,7 +44,7 @@ class CandidateApplied extends Mailable implements ShouldQueue
         return new Content(
             markdown: 'emails.new_application',
             with: [
-                'data' => $this->data
+                'data' => $this->data,
             ]
         );
     }

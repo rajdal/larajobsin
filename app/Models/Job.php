@@ -14,7 +14,7 @@ class Job extends Model implements HasMedia
     use HasFactory;
     use InteractsWithMedia;
 
-    public $table = "vacancies";
+    public $table = 'vacancies';
 
     public $guarded = [];
 

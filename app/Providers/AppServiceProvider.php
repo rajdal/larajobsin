@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Notifications::alignment(Alignment::Start);
-        Notifications::verticalAlignment(VerticalAlignment::End);
+        // Notifications::alignment(Alignment::Start);
+        // Notifications::verticalAlignment(VerticalAlignment::End);
     }
 }

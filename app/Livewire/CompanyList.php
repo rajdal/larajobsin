@@ -3,10 +3,15 @@
 namespace App\Livewire;
 
 use App\Models\Company;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Support\Contracts\TranslatableContentDriver;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
@@ -32,7 +37,33 @@ class CompanyList extends Component implements HasForms, HasTable
                 // ...
             ])
             ->actions([
-                // ...
+                EditAction::make()
+                    ->slideOver()
+                    ->modalWidth('7xl')
+                    ->form([
+                        Section::make()->schema([
+                            Group::make()->schema([
+                                TextInput::make('name')->required(),
+                                TextInput::make('address')->required(),
+                            ])->columns(2),
+                            Group::make()->schema([
+                                TextInput::make('phone')->required(),
+                                TextInput::make('email')->email()->required(),
+                            ])->columns(2),
+                            Group::make()->schema([
+                                TextInput::make('website')->url()->required(),
+                                TextInput::make('tag_line'),
+                            ])->columns(2),
+                            Group::make()->schema([
+                                RichEditor::make('description'),
+                                SpatieMediaLibraryFileUpload::make('logo')
+                                    ->collection('company-logo')
+                                    ->imageEditor()
+                                    ->imagePreviewHeight('full'),
+                            ])->columns(2),
+
+                        ]),
+                    ]),
             ])
             ->bulkActions([
                 // ...

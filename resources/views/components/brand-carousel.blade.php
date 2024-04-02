@@ -316,3 +316,29 @@
     </div>
 </div>
 
+{{-- <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+<!--[if (lt IE 9)]><script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.helper.ie8.js"></script><![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+<!-- NOTE: prior to v2.2.1 tiny-slider.js need to be in <body> -->
+</head>
+
+<div class="w-full slider-container mr-52 ml-52" >
+    <img src="{{asset('imgs/acte-67903.svg')}}" alt="" srcset="" class="w-16 h-16">
+    <img src="{{asset('imgs/cnnsi.svg')}}" alt="" srcset="" class="w-16 h-16">
+    <img src="{{asset('imgs/xerox-8.svg')}}" alt="" srcset="" class="w-16 h-16">
+</div>
+
+
+<script>
+    var slider = tns({
+    container: '.slider-container',
+    items: 3,
+    "navAsThumbnails": true,
+    autoplay: true,
+    "autoplay": true,
+    "autoplayTimeout": 1000,
+    "swipeAngle": false,
+    "speed": 400
+  });
+</script> --}}

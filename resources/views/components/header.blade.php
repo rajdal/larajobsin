@@ -21,21 +21,25 @@
             <span class="block text-sm text-gray-500 truncate dark:text-gray-400">{{auth()->user()->email}}</span>
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
-            @cannot('candidate')
+            @if(auth()->user()->hasAnyRole(['admin', 'employer']))
             <li>
                 <a href="{{url('/manage')}}" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
               </li>
-            @endcannot
+            @endif
 
             <li>
               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
             </li>
+            @if(auth()->user()->hasAnyRole(['admin', 'employer']))
             <li>
               <a href="{{route('companies')}}" wire:navigate class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Companies</a>
             </li>
+            @endif
+            @if(auth()->user()->hasAnyRole(['admin', 'employer']))
             <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
-            </li>
+                <a href="{{route('list.job')}}" wire:navigate class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Jobs</a>
+              </li>
+            @endif
             <li>
               <a href="{{route('logout')}}" wire:navigate class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
             </li>

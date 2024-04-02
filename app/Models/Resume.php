@@ -9,8 +9,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Resume extends Model implements HasMedia
 {
-    use InteractsWithMedia;
     use HasFactory;
+    use InteractsWithMedia;
 
     public $guarded = [];
 

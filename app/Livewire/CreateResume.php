@@ -2,19 +2,17 @@
 
 namespace App\Livewire;
 
-use Filament\Forms;
 use App\Models\Resume;
 use Filament\Forms\Components\FileUpload;
-use Livewire\Component;
-use Filament\Forms\Form;
-use Illuminate\Contracts\View\View;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Form;
+use Illuminate\Contracts\View\View;
+use Livewire\Component;
 
 class CreateResume extends Component implements HasForms
 {
@@ -29,10 +27,10 @@ class CreateResume extends Component implements HasForms
     public function mount()
     {
         $this->resume = Resume::where('user_id', auth()->id())->exists();
-        if($this->resume){
+        if ($this->resume) {
             $this->updateRecord = Resume::where('user_id', auth()->id())->with('media')->first();
             $this->form->fill(Resume::where('user_id', auth()->id())->with('media')->first()->toArray());
-        }else{
+        } else {
             $this->form->fill();
         }
     }
@@ -55,7 +53,7 @@ class CreateResume extends Component implements HasForms
                         ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
                         ->helperText('Only pdf, doc and docx files are accepted')
                         ->required()->downloadable(),
-                ])
+                ]),
             ])
             ->statePath('data')
             ->model(Resume::class);

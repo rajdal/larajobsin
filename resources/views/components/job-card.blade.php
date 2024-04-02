@@ -1,14 +1,14 @@
 
-   @if($job->manage_by_self == 0)
+   @if($job->manage_by_self == 1)
    <a href="{{$job->apply_url}}" target="_blank">
-    <div class="flex flex-row items-center justify-center mt-10" wire:key="$job->id">
-            <div class="relative flex items-center px-2 py-5 rounded-lg shadow-lg md:px-6 md:space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+    <div class="flex flex-row items-center justify-center mt-5" wire:key="$job->id">
+            <div class="relative flex items-center p-4 px-2 py-5 rounded-lg shadow-lg md:px-6 md:space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
             style="min-height:110px;background-color: {{$job->hilight_color ?? '#fcffde'}}; min-width: 50%">
 
             <div
-                class="flex-shrink-0 hidden mb-2 border border-[{{$job->hilight_color}}]  shadow-xl rounded-lg sm:block md:mb-0 lg:absolute md:p-4 md:bg-white md:-left-9">
+                class="flex-shrink-0 hidden mb-2 border border-[{{$job->hilight_color}}]  shadow-xl rounded-2xl sm:block md:mb-0 lg:absolute md:p-4 md:bg-white md:-left-9">
                 <img src="{{ $job->company->getFirstMediaUrl('company-logo') ?? 'https://larajobs.com/logos/46bxEYQ5qExDksLAkW6KbOoQnUm3eODo0SbiSTHP.png' }}" alt="logo""
-                    class="object-contain w-24 h-24 rounded-lg">
+                    class="object-contain w-16 h-16 rounded-lg">
             </div>
             <div class="flex flex-col w-full md:flex-row">
                 <div class="flex-1 w-full min-w-0 px-2 mx-10 mb-2 md:pl-6 md:mb-0" style="color:#2d3748;">
@@ -16,7 +16,7 @@
                     <p class="text-sm text-gray-500 truncate" style="color:#2d3748;">{{$job->company->name}}</p>
                     <p class="text-lg font-bold text-gray-900" style="color:#2d3748;">{{$job->title}}</p>
                     <p class="mt-8 text-sm italic font-medium text-black truncate invert-0">
-                        {{Str::replace('_', ' ',(Str::title($job->employment_type)))." - ". $job->salary_from. " - ". $job->salary_to}}
+                        {{Str::replace('_', ' ',(Str::title($job->employment_type)))." - Rs. ". $job->salary_from. " - Rs. ". $job->salary_to}}
                     </p>
                 </div>
                 <div class="flex-col flex-none px-2 text-sm text-gray-500 md:flex md:justify-end" style="color:#2d3748;">
@@ -41,11 +41,7 @@
                             {{$job->created_at->diffForHumans()}}
                         </div>
                     </div>
-                    @if ($job->manage_by_self == 1)
-                    <div class="flex flex-wrap gap-1 mt-2 md:gap-2 md:justify-end">
-                        <button>Apply</button>
-                    </div>
-                    @endif
+
                     <div class="flex flex-wrap gap-1 mt-2 md:gap-2 md:justify-end">
                         @foreach (explode(',', $job->tags) as $tag)
                         <div
@@ -62,15 +58,15 @@
     </div>
 </a>
 @else
-<a href="#" wire:click='applyJob("{{$job->id}}")' >
-    <div class="flex flex-row items-center justify-center mt-10" wire:key="$job->id">
+<a href="#" wire:click='applyJob("{{$job->id}}")'>
+    <div class="flex flex-row items-center justify-center mt-5" wire:key="$job->id">
             <div class="relative flex items-center px-2 py-5 rounded-lg shadow-lg md:px-6 md:space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
             style="min-height:110px;background-color: {{$job->hilight_color ?? '#fcffde'}}; min-width: 50%">
 
             <div
-                class="flex-shrink-0 hidden mb-2 border border-[{{$job->hilight_color}}]  shadow-xl rounded-lg sm:block md:mb-0 lg:absolute md:p-4 md:bg-white md:-left-9">
+                class="flex-shrink-0 hidden mb-2 border border-[{{$job->hilight_color}}]  shadow-xl rounded-2xl sm:block md:mb-0 lg:absolute md:p-4 md:bg-white md:-left-9">
                 <img src="{{ $job->company->getFirstMediaUrl('company-logo') ?? 'https://larajobs.com/logos/46bxEYQ5qExDksLAkW6KbOoQnUm3eODo0SbiSTHP.png' }}" alt="logo""
-                    class="object-contain w-24 h-24 rounded-lg">
+                    class="object-contain w-16 h-16 rounded-lg">
             </div>
             <div class="flex flex-col w-full md:flex-row">
                 <div class="flex-1 w-full min-w-0 px-2 mx-10 mb-2 md:pl-6 md:mb-0" style="color:#2d3748;">
@@ -78,7 +74,7 @@
                     <p class="text-sm text-gray-500 truncate" style="color:#2d3748;">{{$job->company->name}}</p>
                     <p class="text-lg font-bold text-gray-900" style="color:#2d3748;">{{$job->title}}</p>
                     <p class="mt-8 text-sm italic font-medium text-black truncate invert-0">
-                        {{Str::replace('_', ' ',(Str::title($job->employment_type)))." - ". $job->salary_from. " - ". $job->salary_to}}
+                        {{Str::replace('_', ' ',(Str::title($job->employment_type)))." - Rs. ".$job->salary_from. " - Rs. ". $job->salary_to}}
                     </p>
                 </div>
                 <div class="flex-col flex-none px-2 text-sm text-gray-500 md:flex md:justify-end" style="color:#2d3748;">

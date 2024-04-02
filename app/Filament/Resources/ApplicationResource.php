@@ -2,20 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Tables;
-use App\Models\Resume;
-use App\Models\Company;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
+use App\Filament\Resources\ApplicationResource\Pages;
 use App\Models\Application;
+use App\Models\Company;
+use App\Models\Resume;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\ApplicationResource\Pages;
-use App\Filament\Resources\ApplicationResource\RelationManagers;
 
 class ApplicationResource extends Resource
 {
@@ -38,17 +35,18 @@ class ApplicationResource extends Resource
             ->columns([
                 TextColumn::make('user.name'),
                 TextColumn::make('job.title'),
-                TextColumn::make('created_at')->label('Applied on')->date()
+                TextColumn::make('created_at')->label('Applied on')->date(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Action::make('Resume Download')->action(function(Application $record){
+                Action::make('Resume Download')->action(function (Application $record) {
                     $resume = Resume::where('user_id', $record->user_id)->first();
                     $resumePdf = $resume->getMedia('candidate-resume')[0]->getPath();
+
                     return response()->download($resumePdf);
-                })
+                }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -77,10 +75,11 @@ class ApplicationResource extends Resource
     {
         $authUser = auth()->user();
         $role = $authUser->getRoleNames()->first();
-        if($role == 'admin'){
+        if ($role == 'admin') {
             return parent::getEloquentQuery();
-        }else{
+        } else {
             $companyId = Company::where('user_id', $authUser->id)->first()->id;
+
             return parent::getEloquentQuery()->where('company_id', $companyId);
         }
     }
