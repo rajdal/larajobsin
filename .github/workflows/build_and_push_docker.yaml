@@ -1,0 +1,15 @@
+name: Push Docker Image
+
+on:
+  push
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: build and push image
+        run: |
+          docker login --username $GITHUB_ACTOR --password ${{ secrets.PKG_PAT }} ghcr.io
+          docker build . --tag ghcr.io/$GITHUB_REPOSITORY:latest
+          docker push ghcr.io/$GITHUB_REPOSITORY:latest
