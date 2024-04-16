@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,29 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        \App\Models\User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('password'),
+        // Role Seeder
+        $this->call([
+            TagSeeder::class,
+            RoleSeeder::class,
+            AdminUserSeeder::class,
         ]);
-
-        $tags = [
-            'Laravel',
-            'PHP',
-            'JavaScript',
-            'VueJS',
-            'React',
-            'Angular',
-            'Tailwind',
-            'Svelte',
-        ];
-
-        foreach ($tags as $tag) {
-            Tag::create([
-                'name' => $tag,
-            ]);
-        }
     }
 }
