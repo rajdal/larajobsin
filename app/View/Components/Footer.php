@@ -22,6 +22,7 @@ class Footer extends Component
     public function render(): View|Closure|string
     {
         // Temp comment...
+        // Temp comment...
         return view('components.footer');
     }
 }
